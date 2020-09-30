@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "dev:build:server": "webpack --config webpack.server.js --progress"
+  },
   "dependencies": {
     "axios": "^0.20.0",
     "babel-cli": "6.26.0",
