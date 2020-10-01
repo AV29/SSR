@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "Server side rendering project",
   "main": "index.js",
-  "author": "",
+  "author": "Anton Vlasik",
   "license": "ISC",
   "scripts": {
-    "dev:build:server": "webpack --config webpack.server.js --progress"
+    "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
+    "dev:build:server": "webpack --config webpack.server.js --progress --watch",
+    "dev:build:client": "webpack --config webpack.client.js --progress --watch"
   },
   "dependencies": {
     "axios": "^0.20.0",
