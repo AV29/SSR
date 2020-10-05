@@ -12,7 +12,9 @@ export default request => {
 
     return `
       <html>
-      <head></head>
+      <head>
+            <link rel="icon" href="data:,">
+      </head>
       <body>
             <div id="root">${content}</div>
             <script src="bundle.js"></script>
