@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { arrayOf, shape, string } from 'prop-types';
+import { arrayOf, shape, string, number } from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
 
 const Users = props => {
 
     useEffect(() => {
-        // props.fetchUsers();
+        props.fetchUsers();
     }, []);
 
     return (
@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
 
 Users.propTypes = {
     users: arrayOf(shape({
-        id: string,
+        id: number,
         name: string
     }))
 };
