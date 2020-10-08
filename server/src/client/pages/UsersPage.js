@@ -3,7 +3,7 @@ import { arrayOf, shape, string, number } from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
 
-const Users = props => {
+const UsersPage = props => {
 
     useEffect(() => {
         props.fetchUsers();
@@ -12,9 +12,11 @@ const Users = props => {
     return (
         <div>
             Here's a list of users
-            {props.users.map(user => (
-                <li key={user.id}>{user.name}</li>
-            ))}
+            <ul>
+                {props.users.map(user => (
+                    <li key={user.id}>{user.name}</li>
+                ))}
+            </ul>
         </div>
     );
 };
@@ -27,15 +29,16 @@ const mapDispatchToProps = dispatch => ({
     fetchUsers: () => dispatch(fetchUsers())
 });
 
-export const loadData = () => {
-    console.log('Loading!');
-};
+export const loadData = store => store.dispatch(fetchUsers());
 
-Users.propTypes = {
+UsersPage.propTypes = {
     users: arrayOf(shape({
         id: number,
         name: string
     }))
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default {
+    component: connect(mapStateToProps, mapDispatchToProps)(UsersPage),
+    loadData
+};
