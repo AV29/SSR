@@ -27,6 +27,10 @@ const mapDispatchToProps = dispatch => ({
     fetchUsers: () => dispatch(fetchUsers())
 });
 
+export const loadData = () => {
+    console.log('Loading!');
+};
+
 Users.propTypes = {
     users: arrayOf(shape({
         id: number,
