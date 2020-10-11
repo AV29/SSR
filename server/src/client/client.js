@@ -1,6 +1,7 @@
 // startup for the client side application
 import 'babel-polyfill';
 import React from 'react';
+import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
@@ -10,7 +11,15 @@ import { Provider } from 'react-redux';
 import reducers from './reducers';
 import routes from './routes';
 
-const store = createStore(reducers, window.INITIAL_STATE, applyMiddleware(thunk));
+const axiosInstance = axios.create({
+    baseURL: '/api'
+});
+
+const store = createStore(
+    reducers,
+    window.INITIAL_STATE,
+    applyMiddleware(thunk.withExtraArgument(axiosInstance))
+);
 
 ReactDOM.hydrate(
     <Provider store={store}>
