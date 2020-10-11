@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const API_ENDPOINT = 'http://react-ssr-api.herokuapp.com';
+import { API_ENDPOINT } from '../../constants';
 
 export const FETCH_USERS = 'FETCH_USERS';
 
