@@ -1,15 +1,18 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
+import Header from './components/Header';
+import { fetchCurrentUser } from './actions';
 
 const App = props => {
     return (
         <div>
-            <h1>Shit!</h1>
+            <Header auth={props.auth} />
             {renderRoutes(props.route.routes)}
         </div>
     );
 };
 
 export default {
-    component: App
+    component: App,
+    loadData: ({ dispatch }) => dispatch(fetchCurrentUser())
 };

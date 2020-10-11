@@ -29,8 +29,6 @@ const mapDispatchToProps = dispatch => ({
     fetchUsers: () => dispatch(fetchUsers())
 });
 
-export const loadData = store => store.dispatch(fetchUsers());
-
 UsersPage.propTypes = {
     users: arrayOf(shape({
         id: number,
@@ -40,5 +38,5 @@ UsersPage.propTypes = {
 
 export default {
     component: connect(mapStateToProps, mapDispatchToProps)(UsersPage),
-    loadData
+    loadData: ({ dispatch }) => dispatch(fetchUsers())
 };
