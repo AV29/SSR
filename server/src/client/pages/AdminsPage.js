@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { arrayOf, shape, string, number } from 'prop-types';
 import { connect } from 'react-redux';
+import requireAuth from '../components/hocs/requireAuth';
 import { fetchAdmins } from '../actions';
 
 const AdminsPage = props => {
@@ -32,6 +33,6 @@ export default {
     component: connect(
         ({ admins }) => ({ admins }),
         { fetchAdmins }
-    )(AdminsPage),
+    )(requireAuth(AdminsPage)),
     loadData: ({ dispatch }) => dispatch(fetchAdmins())
 };

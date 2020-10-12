@@ -15,7 +15,7 @@ app.use('/api', proxy(API_ENDPOINT, {
     }
 }));
 
-const wrapWithPromise = promise => new Promise(resolve => promise.finally(resolve));
+const wrapWithPromise = promise => new Promise(resolve => promise.then(resolve).catch(resolve));
 
 app.use(express.static('public'));
 app.get('*', (req, res) => {
@@ -30,6 +30,10 @@ app.get('*', (req, res) => {
 
         const context = {};
         const content = renderer(req, store, context);
+
+        if(context.url) {
+            return res.redirect(301, context.url);
+        }
 
         if(context.notFound) {
             res.status(404);
