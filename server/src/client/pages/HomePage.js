@@ -1,14 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const HomePage = () => {
     return (
-        <div>
-            <div>I'm the super-duper home component</div>
-            <button onClick={console.log}>
-                <Link to={"/users"}>Press Me!</Link>
-            </button>
-        </div>
+        <h1 style={{ textAlign: 'center' }}>I'm the super-duper home component</h1>
     );
 };
 

@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const linkStyle = {
-    margin: '0 10px'
+    margin: '0 10px',
+    color: 'white',
+    textDecoration: 'none'
 };
 
 const headerStyle = {
-    height: 50,
-    padding: 10,
+    padding: 20,
     display: 'flex',
     justifyContent: 'space-between',
     border: '1px solid lightgrey',
@@ -21,7 +22,7 @@ const headerStyle = {
 const Header = props => {
     return (
         <div style={headerStyle}>
-            <Link to="/">React SSR</Link>
+            <Link to="/" style={linkStyle}>React SSR</Link>
             <div>
                 <Link to={"/users"} style={linkStyle}>Users</Link>
                 <Link to={"/admins"} style={linkStyle}>Admins</Link>

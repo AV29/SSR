@@ -14,13 +14,20 @@ app.use('/api', proxy(API_ENDPOINT, {
         return opts;
     }
 }));
+
+const wrapWithPromise = promise => new Promise(resolve => promise.finally(resolve));
+
 app.use(express.static('public'));
 app.get('*', (req, res) => {
     const store = createStore(req);
     const promises = matchRoutes(routes, req.path)
-        .map(({ route }) => route.loadData ? route.loadData(store) : null);
+        .map(({ route }) => route.loadData
+            ? wrapWithPromise(route.loadData(store))
+            : null
+        );
 
     Promise.all(promises).then(() => {
+
         const context = {};
         const content = renderer(req, store, context);
 
@@ -29,7 +36,7 @@ app.get('*', (req, res) => {
         }
 
         res.send(content);
-    }).catch(err => {});
+    });
 });
 
 app.listen(3000, () => {
