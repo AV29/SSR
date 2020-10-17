@@ -4,6 +4,7 @@ import serialize from 'serialize-javascript';
 import { StaticRouter } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import { renderRoutes } from 'react-router-config';
+import { Helmet } from 'react-helmet';
 import routes from '../client/routes';
 
 export default (request, store, context) => {
@@ -15,9 +16,13 @@ export default (request, store, context) => {
         </Provider>
     );
 
+    const helmet = Helmet.renderStatic();
+
     return `
       <html>
       <head>
+            ${helmet.title.toString()}
+            ${helmet.meta.toString()}
             <link rel="icon" href="data:,">
       </head>
       <body>

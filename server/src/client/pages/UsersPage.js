@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { arrayOf, shape, string, number } from 'prop-types';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../actions';
 
@@ -9,12 +10,20 @@ const UsersPage = props => {
         props.fetchUsers();
     }, []);
 
+    const head = () => (
+        <Helmet>
+            <title>{`${props.users.length} Users Loaded`}</title>
+            <meta property="og:title" content="Users App" />
+        </Helmet>
+    );
+
     return (
         <div>
+            {head()}
             Here's a list of users
             <ul>
                 {props.users.map(user => (
-                    <li key={user.id}>{user.name}</li>
+                    <li key={user.id} onClick={() => console.log(user.name)}>{user.name}</li>
                 ))}
             </ul>
         </div>
